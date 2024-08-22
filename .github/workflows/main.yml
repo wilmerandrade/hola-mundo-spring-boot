@@ -42,7 +42,6 @@ jobs:
 
     - name: Verification
       run: |
-        docker-compose logs -f
         docker-compose ps -a
 
   
