@@ -1,0 +1,44 @@
+# docker-compose -f .\docker-compose.yml build # Construye la imagen Docker
+# docker-compose -f .\docker-compose.yml up -d # Levanta los servicios
+# docker-compose -f .\docker-compose.yml down  # Eliminar contenedores detenidos
+# docker-compose logs -f                       # Verificación
+
+version: '3.3'
+
+networks:
+  devops_network:
+    driver: bridge
+
+services:
+  app:
+    container_name: helloword
+    build:
+      context: /
+      dockerfile: Dockerfile
+    restart: always
+#    privileged: true
+#    user: root
+    ports:
+      - 8080:8080
+#    volumes:
+##      - redhat_data:/usr/lib
+    networks:
+      - devops_network
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - devops_network
+
+volumes:
+#  redhat_data:
+  postgres_data:
