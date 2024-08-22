@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted  # ubuntu-latest
+    runs-on: ubuntu-latest # self-hosted
 
     steps:
     - name: Checkout code
@@ -31,6 +31,9 @@ jobs:
         docker-compose -f docker-compose.yml up -d
 
     - name: Verification
-      run: docker-compose logs -f
+      run: |
+        docker-compose logs -f
+        docker-compose ps -a
+
   
 #  deploy:
