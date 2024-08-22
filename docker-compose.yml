@@ -13,7 +13,7 @@ services:
   app:
     container_name: helloword
     build:
-      context: /
+      context: .
       dockerfile: Dockerfile
     restart: always
 #    privileged: true
