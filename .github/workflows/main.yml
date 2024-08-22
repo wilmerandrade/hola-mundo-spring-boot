@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: self-hosted  # ubuntu-latest
 
     steps:
@@ -32,3 +32,5 @@ jobs:
 
     - name: Verification
       run: docker-compose logs -f
+  
+#  deploy:
